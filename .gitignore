@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Conda
+.conda/
+
+# Flask
+instance/
+.webassets-cache
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Project specific
+mbox/*
+!mbox/.gitkeep
+processed_mbox/*
+!processed_mbox/.gitkeep
+emails.db
+
+# Sensitive information
+config.ini
+secrets.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

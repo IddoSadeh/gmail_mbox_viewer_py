@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folder: {{ folder_path }}</title>
+</head>
+<body>
+    <h1>Folder: {{ folder_path }}</h1>
+    <h2>Subfolders:</h2>
+    <ul>
+    {% for folder in folders %}
+        <li><a href="{{ url_for('view_folder', folder_path=folder_path + '/' + folder) }}">{{ folder }}</a></li>
+    {% endfor %}
+    </ul>
+    <h2>Emails:</h2>
+    <ul>
+    {% for email in emails %}
+        <li><a href="{{ url_for('view_email', email_path=folder_path + '/' + email) }}">{{ email }}</a></li>
+    {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('index') }}">Back to main folder</a></p>
+</body>
+</html>

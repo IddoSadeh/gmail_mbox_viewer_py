@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Label: {{ label }}</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Label: {{ label }}</h1>
+    <a href="{{ url_for('index') }}">Back to labels</a>
+    {% if parent_label and parent_label[0] %}
+    <p>Parent Label: <a href="{{ url_for('view_label', label=parent_label[0]|urlencode) }}">{{ parent_label[0] }}</a></p>
+    {% endif %}
+    {% if sublabels %}
+    <h2>Sublabels:</h2>
+    <ul>
+    {% for sublabel in sublabels %}
+        <li><a href="{{ url_for('view_label', label=sublabel['label']|urlencode) }}">{{ sublabel['label'].split('/')[-1] }}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Sender</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    {% for email in emails %}
+        <tr>
+            <td><a href="{{ url_for('view_email', email_id=email['id']) }}">{{ email['subject'] }}</a></td>
+            <td>{{ email['sender'] }}</td>
+            <td>{{ email['date'] }}</td>
+            <td>
+                <form action="{{ url_for('delete_email', email_id=email['id']) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this email?');">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

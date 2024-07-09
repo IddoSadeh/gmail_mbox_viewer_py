@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Viewer</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Email Labels</h1>
+    <form action="{{ url_for('search') }}" method="get">
+        <input type="text" name="q" placeholder="Search emails...">
+        <input type="submit" value="Search">
+    </form>
+    <p><strong>Search Explanation:</strong> Use the search bar above to find emails by subject, sender, or content. Enter your search terms and click 'Search' to see matching results.</p>
+    <h2>Labels:</h2>
+    <ul>
+    {% for label in labels %}
+        <li><a href="{{ url_for('view_label', label=label['label']|urlencode) }}">{{ label['label'] }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
