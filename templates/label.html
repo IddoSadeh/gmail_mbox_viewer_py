@@ -18,10 +18,11 @@
     <h2>Sublabels:</h2>
     <ul>
     {% for sublabel in sublabels %}
-        <li><a href="{{ url_for('view_label', label=sublabel['label']|urlencode) }}">{{ sublabel['label'].split('/')[-1] }}</a></li>
+        <li><a href="{{ url_for('view_label', label=sublabel['label']|urlencode) }}">{{ sublabel['label'] }}</a></li>
     {% endfor %}
     </ul>
     {% endif %}
+    <h2>Emails:</h2>
     <table>
         <tr>
             <th>Subject</th>

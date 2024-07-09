@@ -2,36 +2,17 @@
 <html>
 <head>
     <title>Email: {{ email['subject'] }}</title>
-    <style>
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
 </head>
 <body>
     <h1>{{ email['subject'] }}</h1>
-    <table>
-        <tr>
-            <th>From</th>
-            <td>{{ email['sender'] }}</td>
-        </tr>
-        <tr>
-            <th>To</th>
-            <td>{{ email['recipient'] }}</td>
-        </tr>
-        <tr>
-            <th>Date</th>
-            <td>{{ email['date'] }}</td>
-        </tr>
-        <tr>
-            <th>Labels</th>
-            <td>
-            {% for label in labels %}
-                <a href="{{ url_for('view_label', label=label['label']|urlencode) }}">{{ label['label'] }}</a>{% if not loop.last %}, {% endif %}
-            {% endfor %}
-            </td>
-        </tr>
-    </table>
+    <p><strong>From:</strong> {{ email['sender'] }}</p>
+    <p><strong>To:</strong> {{ email['recipient'] }}</p>
+    <p><strong>Date:</strong> {{ email['date'] }}</p>
+    <p><strong>Labels:</strong> 
+    {% for label in labels %}
+        <a href="{{ url_for('view_label', label=label['label']|urlencode) }}">{{ label['label'] }}</a>{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    </p>
     <hr>
     {% if email['content_type'] == 'text/plain' %}
         <pre>{{ email['content'] | safe }}</pre>

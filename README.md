@@ -38,17 +38,14 @@ mail/
    cd gmail_mbox_viewer_py
    ```
 
-2. Create a virtual environment and activate it:
+2. Create the Conda environment from the environment.yml file:
    ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   conda env create -f environment.yml
    ```
-
-3. Install the required packages:
+3. Activate the Conda environment:
    ```
-   pip install -r requirements.txt
+   conda activate gmail_mbox_viewer
    ```
-
 4. Place your Gmail mbox files in the `mbox/` directory.
 
 5. Create the database and process mbox files:
@@ -62,6 +59,28 @@ mail/
    ```
 
 7. Open a web browser and navigate to `http://localhost:5000`.
+
+### Database Schema
+
+```
++-------------------+        +-------------------+
+|      emails       |        |      labels       |
++-------------------+        +-------------------+
+| id (TEXT)         |        | email_id (TEXT)   |
+| subject (TEXT)    |        | label (TEXT)      |
+| sender (TEXT)     |        | parent_label (TEXT)|
+| recipient (TEXT)  |        +-------------------+
+| date (TEXT)       |
+| content (TEXT)    |
+| content_type (TEXT)|
++-------------------+
+
+```
+- The 'emails' table stores individual email messages.
+- The 'labels' table stores labels associated with each email.
+- The 'email_id' in the 'labels' table is a foreign key referencing the 'id' in the 'emails' table.
+- 'parent_label' in the 'labels' table allows for hierarchical label structure.
+
 
 ### Customization
 
@@ -107,6 +126,7 @@ mail/
 - Ensure that your mbox files are properly formatted and placed in the `mbox/` directory before processing.
 - Check the console output for any error messages when running the application.
 - If emails are not showing up after processing, check that the mbox files have been moved to the `processed_mbox/` directory.
+- **Non English** do not work in this version. Some email content not in english also does not work. work in progress...
 
 ## License
 
